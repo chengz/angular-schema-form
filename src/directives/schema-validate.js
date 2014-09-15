@@ -72,6 +72,10 @@ angular.module('schemaForm').directive('schemaValidate', ['sfValidator', functio
       scope.hasError = function() {
         return ngModel.$invalid;
       };
+      
+      scope.schemaError = function() {
+        return error;
+      };
     }
   };
 }]);

@@ -53,6 +53,8 @@ angular.module('schemaForm').directive('schemaValidate', ['sfValidator', functio
       // Listen to an event so we can validate the input on request
       scope.$on('schemaFormValidate', function() {
 
+       // on validate, trigger validate first before commit value
+        validate(ngModel.$viewValue);
         if (ngModel.$commitViewValue) {
           ngModel.$commitViewValue(true);
         } else {
@@ -63,17 +65,13 @@ angular.module('schemaForm').directive('schemaValidate', ['sfValidator', functio
       //This works since we now we're inside a decorator and that this is the decorators scope.
       //If $pristine and empty don't show success (even if it's valid)
       scope.hasSuccess = function() {
-        return ngModel.$valid && (!ngModel.$pristine || !ngModel.$isEmpty(ngModel.$modelValue));
+        return ngModel.$valid && !ngModel.$pristine;
       };
 
+      // if it's invalid, show error
       scope.hasError = function() {
-        return ngModel.$invalid && !ngModel.$pristine;
+        return ngModel.$invalid;
       };
-
-      scope.schemaError = function() {
-        return error;
-      };
-
     }
   };
 }]);

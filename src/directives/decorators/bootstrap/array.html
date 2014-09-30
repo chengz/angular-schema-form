@@ -1,7 +1,7 @@
 <div sf-array="form" ng-model="$$value$$" ng-model-options="form.ngModelOptions">
   <h3 ng-show="form.title && form.notitle !== true">{{ form.title }}</h3>
-  <ol class="list-group" ng-model="modelArray" ui-sortable>
-    <li class="list-group-item" ng-repeat="item in modelArray track by $index">
+  <ol class="list-group {{form.options.collectionClass}}" ng-model="modelArray" ui-sortable>
+    <li class="list-group-item {{form.options.itemClass}}" ng-repeat="item in modelArray track by $index">
       <button ng-click="deleteFromArray($index)"
               style="position: relative; z-index: 20;"
               type="button" class="close pull-right">
@@ -10,7 +10,8 @@
       <sf-decorator ng-init="arrayIndex = $index" form="copyWithIndex($index)"></sf-decorator>
     </li>
   </ol>
-  <div class="clearfix" style="padding: 15px;">
+  <div class="clearfix"></div>
+  <div ng-if="!form.options.hideButton" class="clearfix" style="padding: 15px;">
     <button ng-click="appendToArray()"
             type="button"
             class="btn {{ form.style.add || 'btn-default' }} pull-right">

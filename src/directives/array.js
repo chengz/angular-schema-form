@@ -100,6 +100,9 @@ angular.module('schemaForm').directive('sfArray', ['sfSelect', 'schemaForm', 'sf
             if (scope.validateArray) {
               scope.validateArray();
             }
+            if (list.length == 0) {
+              scope.appendToArray();
+            }
             return list;
           };
 
